@@ -43,6 +43,8 @@ class App extends Component {
         }
       });
       this.setState({ absentDays, problemDays: tempDays });
+    } else {
+      this.setState({ absentDays: [], problemDays: 0 });
     }
   }
 

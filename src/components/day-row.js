@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DE_LOVELY_BIRTHDAY } from '../constant/constant';
 import './index.css';
 
 const rowArr = [1, 2, 3, 4, 5, 6];
@@ -44,6 +45,9 @@ class DayRow extends Component {
     const dateStr = e.target.id;
     const dateArr = dateStr.split('-');
     const date = dateArr[0] + '-' + dateArr[1] + '-' + (+dateArr[2] < 10 ? '0'+dateArr[2] : dateArr[2]);
+    if (date.indexOf(DE_LOVELY_BIRTHDAY) > -1) {
+      alert('Happy BirthDay! My De-Lovely Girl~');
+    }
     const week = weekDay[dateArr[3]];
     const calendar_date = window.localStorage.getItem('lovely_calendar_date');
     const cellDom = document.getElementById(e.target.id);
@@ -71,6 +75,8 @@ class DayRow extends Component {
         });
         if (newArr.length === 0) {
           window.localStorage.removeItem('lovely_calendar_date');
+        } else {
+          window.localStorage.setItem('lovely_calendar_date', JSON.stringify(newArr));
         }
         this.props.addAbsentDays();
       } else {
@@ -108,9 +114,9 @@ class DayRow extends Component {
                     const today = `${year}-${month}-${(dayId-firstDay) < 10 ? '0' +(dayId - firstDay) : (dayId - firstDay)}`;
                     if (existDateArr.indexOf(today) > -1) {
                       const { clickType } = absentDays[existDateArr.indexOf(today)];
-                      dom = <div onClick={this.wholeDay} onDoubleClick={this.halfDay} key={`day-cell-${dayId}`} id={`${year}-${month}-${dayId-firstDay}-${weekStr[count]}`} className='day-cell' style={{ backgroundColor: clickType === 'whole' ? 'red' : 'orange' }}>{dayId - firstDay}</div>
+                      dom = <div onClick={this.wholeDay} key={`day-cell-${dayId}`} id={`${year}-${month}-${dayId-firstDay}-${weekStr[count]}`} className='day-cell' style={{ backgroundColor: clickType === 'whole' ? 'red' : 'orange' }}>{dayId - firstDay}</div>
                     } else {
-                      dom = <div onClick={this.wholeDay} onDoubleClick={this.halfDay} key={`day-cell-${dayId}`} id={`${year}-${month}-${dayId-firstDay}-${weekStr[count]}`} className='day-cell'>{dayId - firstDay}</div>
+                      dom = <div onClick={this.wholeDay} key={`day-cell-${dayId}`} id={`${year}-${month}-${dayId-firstDay}-${weekStr[count]}`} className='day-cell'>{dayId - firstDay}</div>
                     }
                   } else {
                     dom = <div key={`day-cell-${dayId}`} id={'day' + dayId} className='day-cell' style={{ color: '#ddd' }}>{dayId}</div> 

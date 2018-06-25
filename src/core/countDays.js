@@ -1,7 +1,9 @@
+import { START_TERM_DATE, END_TERM_DATE } from '../constant/constant';
+
 //起始日期，<span style="background-color:rgb(204,204,204);"><span style="color:#FF0000;"><strong>/pattern/是正则表达式的界定符，pattern是要匹配的内容，只用于第一个符号的匹配，g为全局匹配标志</strong></span></span>  
-var beginDate = new Date("2018-04-17".replace(/-/g, "/"));  
+var beginDate = new Date(START_TERM_DATE.replace(/-/g, "/"));  
 //结束日期  
-var endDate = new Date("2018-09-14".replace(/-/g, "/"));  
+var endDate = new Date(END_TERM_DATE.replace(/-/g, "/"));  
 //日期差值,即包含周六日、以天为单位的工时，86400000=1000*60*60*24.  
 var workDayVal = (endDate - beginDate)/86400000 + 1;  
 //工时的余数  
